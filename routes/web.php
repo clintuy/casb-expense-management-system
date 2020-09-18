@@ -11,10 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    Route::resource('users', 'UsersController');
+    Route::resource('roles', 'RolesController');
+    Route::resource('permissions', 'PermissionsController');
+
+    Route::resource('expense-categories', 'ExpenseCategoriesController');
+    Route::resource('expenses', 'ExpensesController');
 });
 
-Auth::routes();
+Route::get('/', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/register', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/reset', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/verify', function () {
+    return Redirect::to( '/login');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false
+]);

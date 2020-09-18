@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bg-custom-primary {
+    background-color: $custom-primary-color;
+}
+.bg-custom-secondary {
+    background-color: $custom-secondary-color;
+}
+
+table, 
+thead,
+tr,
+tbody,
+th,
+td {
+    text-align: center;
+    vertical-align: middle;
+}
