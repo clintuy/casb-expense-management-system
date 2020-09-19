@@ -25,3 +25,7 @@
 ## Then you can run it now by using this:
 
     $ php artisan serve
+    
+## Default Account is:
+    - Username: admin@purple.test
+    - Password: 123123
