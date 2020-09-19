@@ -11,10 +11,46 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth'], function() {
+
+    // Dashboard Route
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+    // Profile Route
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::post('/profile/change-password', 'ProfileController@change_password')->name('change_password');
+
+    // Users Route
+    Route::resource('users', 'UsersController');
+
+    // Roles Route
+    Route::resource('roles', 'RolesController');
+
+    // Permissions Route
+    Route::resource('permissions', 'PermissionsController');
+
+    // Expense Categories Route
+    Route::resource('expense-categories', 'ExpenseCategoriesController');
+
+    // Expenses Route
+    Route::resource('expenses', 'ExpensesController');
 });
 
-Auth::routes();
+Route::get('/', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/register', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/reset', function () {
+    return Redirect::to( '/login');
+});
+Route::get('/verify', function () {
+    return Redirect::to( '/login');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false
+]);
