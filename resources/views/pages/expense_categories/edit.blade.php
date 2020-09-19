@@ -47,7 +47,7 @@
 
                 <!-- Edit Expense Category Button -->
                 <div class="text-right mt-3">
-                    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i> Update Expense Category</a>
+                    <button class="btn btn-dark" type="submit"><i class="fas fa-download"></i> Update Expense Category</a>
                 </div>
             </form>
         </div>

@@ -57,7 +57,7 @@
 
                                         <!-- Edit Expense Button -->
                                         @can('edit_expense')
-                                            <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-sm btn-outline-dark"><i class="fas fa-user-edit"></i></a>
+                                            <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-sm btn-outline-dark"><i class="fas fa-edit"></i></a>
                                         @endcan
 
                                         <!-- Delete Expense Button -->

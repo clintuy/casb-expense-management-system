@@ -11,9 +11,14 @@ use DB;
 class ExpensesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $i = 0;
+        abort_unless(\Gate::allows('expense_access'), 403);
 
         //get all expense
         $expenses = DB::table('expenses AS e')
@@ -29,6 +34,8 @@ class ExpensesController extends Controller
 
     public function create()
     {
+        abort_unless(\Gate::allows('add_expense'), 403);
+
         $expense_categories = ExpenseCategory::orderBy('name', 'ASC')->get();
 
         return view('pages.expenses.create', compact('expense_categories'));
@@ -37,6 +44,8 @@ class ExpensesController extends Controller
 
     public function store(Request $request)
     {
+        abort_unless(\Gate::allows('add_expense'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'expenseName' => ['required'],
@@ -66,6 +75,8 @@ class ExpensesController extends Controller
 
     public function edit($id)
     {
+        abort_unless(\Gate::allows('edit_expense'), 403);
+
         $expense = Expense::where('id', $id)->firstOrFail();
 
         $expense_categories = ExpenseCategory::all();
@@ -76,6 +87,8 @@ class ExpensesController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_unless(\Gate::allows('edit_expense'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'expenseName' => ['required'],
@@ -101,6 +114,8 @@ class ExpensesController extends Controller
 
     public function destroy($id)
     {
+        abort_unless(\Gate::allows('delete_expense'), 403);
+
         $expense = Expense::where('id', $id)->firstOrFail();
         $expense->delete();
 

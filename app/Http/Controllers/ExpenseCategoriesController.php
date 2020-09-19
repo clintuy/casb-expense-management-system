@@ -9,8 +9,15 @@ use App\ExpenseCategory;
 class ExpenseCategoriesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        abort_unless(\Gate::allows('expense_category_access'), 403);
+
         //get all expense category
         $expense_categories = ExpenseCategory::all();
 
@@ -20,12 +27,16 @@ class ExpenseCategoriesController extends Controller
 
     public function create()
     {
+        abort_unless(\Gate::allows('add_expense_category'), 403);
+
         return view('pages.expense_categories.create');
     }
 
 
     public function store(Request $request)
     {
+        abort_unless(\Gate::allows('add_expense_category'), 403); 
+
         // validate inputs
         $validator = $request->validate([
             'categoryName' => ['required', 'string', 'max:255', 'unique:expense_categories,name']
@@ -50,6 +61,8 @@ class ExpenseCategoriesController extends Controller
 
     public function edit($id)
     {
+        abort_unless(\Gate::allows('edit_expense_category'), 403);
+
         // find expense expense category
         $expense_category = ExpenseCategory::where('id', $id)->firstOrFail();
 
@@ -59,6 +72,8 @@ class ExpenseCategoriesController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_unless(\Gate::allows('edit_expense_category'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'categoryName' => ['required', 'string', 'max:255', 'unique:expense_categories,name,' . $id]
@@ -77,6 +92,8 @@ class ExpenseCategoriesController extends Controller
 
     public function destroy($id)
     {
+        abort_unless(\Gate::allows('delete_expense_category'), 403);
+
         $expense_category = ExpenseCategory::where('id', $id)->firstOrFail();
         $expense_category->delete();
 

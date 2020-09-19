@@ -40,7 +40,7 @@
                     <tbody>
 
                         <!-- Role Info Lists -->
-                        @forelse ($roles as $role)
+                        @foreach ($roles as $role)
                             <tr>
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
@@ -56,23 +56,21 @@
 
                                         <!-- Edit Role Button -->
                                         @can('edit_role')
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-outline-dark"><i class="fas fa-user-edit"></i></a>
+                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-outline-dark"><i class="fas fa-edit"></i></a>
                                         @endcan
 
                                         <!-- Delete Role Button -->
                                         @can('delete_role')
-                                        <a href="#" class="btn btn-sm btn-outline-dark"><i class="fas fa-trash-alt"></i></a>
+                                            <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
+                                            {{ method_field('DELETE') }}
+                                            @csrf
+                                                <button class="btn btn-sm btn-outline-dark" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this role?')"><i class="fas fa-trash-alt"></i></button> 
+                                            </form>
                                         @endcan
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3">
-                                    <h1>No role found.</h1>
-                                </td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -128,7 +128,7 @@
 
                 <!-- Save User Button -->
                 <div class="text-right">
-                    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i> Save User</a>
+                    <button class="btn btn-dark" type="submit"><i class="fas fa-download"></i> Save User</a>
                 </div>
             </form>
         </div>

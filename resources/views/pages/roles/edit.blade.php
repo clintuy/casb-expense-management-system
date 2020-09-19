@@ -75,7 +75,7 @@
 
                 <!-- Update Role Button -->
                 <div class="text-right mt-3">
-                    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i> Update Role</a>
+                    <button class="btn btn-dark" type="submit"><i class="fas fa-download"></i> Update Role</a>
                 </div>
             </form>
         </div>

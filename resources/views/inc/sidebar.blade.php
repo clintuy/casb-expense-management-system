@@ -92,8 +92,15 @@
                             {{ auth()->user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="navbarDropdown">
+                            
+                            <!-- Profile Button -->
+                            <a class="dropdown-item" href="/profile">
+                                <i class="fas fa-user pr-3"></i>Profile
+                            </a>
+
+                            <!-- Logout Button -->
                             <a class="dropdown-item" id="btnLogout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
+                            <i class="fas fa-sign-out-alt pr-3"></i>Logout
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

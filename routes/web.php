@@ -13,12 +13,26 @@
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    // Dashboard Route
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+    // Profile Route
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::post('/profile/change-password', 'ProfileController@change_password')->name('change_password');
+
+    // Users Route
     Route::resource('users', 'UsersController');
+
+    // Roles Route
     Route::resource('roles', 'RolesController');
+
+    // Permissions Route
     Route::resource('permissions', 'PermissionsController');
 
+    // Expense Categories Route
     Route::resource('expense-categories', 'ExpenseCategoriesController');
+
+    // Expenses Route
     Route::resource('expenses', 'ExpensesController');
 });
 

@@ -19,6 +19,8 @@ class RolesController extends Controller
 
     public function index()
     {
+        abort_unless(\Gate::allows('role_access'), 403);
+
         // get all roles
         $roles = Role::all();
 
@@ -28,6 +30,8 @@ class RolesController extends Controller
 
     public function create()
     {
+        abort_unless(\Gate::allows('add_role'), 403);
+
         // get all permissions
         $permissions = Permission::all();
 
@@ -37,6 +41,8 @@ class RolesController extends Controller
 
     public function store(Request $request)
     {
+        abort_unless(\Gate::allows('add_role'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'roleName' => ['required', 'string', 'max:255', 'unique:roles,name'],
@@ -65,6 +71,8 @@ class RolesController extends Controller
 
     public function edit($id)
     {
+        abort_unless(\Gate::allows('edit_role'), 403);
+
         // find role
         $role = Role::where('id', $id)->firstOrFail();
 
@@ -77,6 +85,8 @@ class RolesController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_unless(\Gate::allows('edit_role'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'roleName' => ['required', 'string', 'max:255', 'unique:roles,name,' . $id],
@@ -108,6 +118,12 @@ class RolesController extends Controller
 
     public function destroy($id)
     {
-        //
+        abort_unless(\Gate::allows('delete_role'), 403);
+
+        $role = Role::where('id', $id)->firstOrFail();
+        $role->delete();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Role data successfully deleted!');
     }
 }

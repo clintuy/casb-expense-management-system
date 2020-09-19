@@ -18,6 +18,8 @@ class UsersController extends Controller
 
     public function index()
     {
+        abort_unless(\Gate::allows('user_access'), 403);
+        
         // get all users
         $users = User::all();
         return view('pages.users.index', compact('users'));
@@ -26,6 +28,8 @@ class UsersController extends Controller
 
     public function create()
     {
+        abort_unless(\Gate::allows('add_user'), 403);
+
         // get all roles
         $roles = Role::all();
         return view('pages.users.create', compact('roles'));
@@ -34,6 +38,8 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        abort_unless(\Gate::allows('add_user'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'fullName' => ['required', 'string', 'max:255'],
@@ -70,6 +76,8 @@ class UsersController extends Controller
 
     public function edit($id)
     {
+        abort_unless(\Gate::allows('edit_user'), 403);
+
         // find user with this id
         $user = User::where('id', $id)->firstOrFail();
 
@@ -82,6 +90,8 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_unless(\Gate::allows('edit_user'), 403);
+        
         // validate inputs
         $validator = $request->validate([
             'fullName' => ['required', 'string', 'max:255'],
@@ -116,6 +126,12 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-        //
+        abort_unless(\Gate::allows('delete_user'), 403);
+
+        $user = User::where('id', $id)->firstOrFail();
+        $user->delete();
+
+        return redirect()->route('users.index')
+            ->with('success', 'User data successfully deleted!');
     }
 }

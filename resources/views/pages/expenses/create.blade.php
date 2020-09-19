@@ -92,7 +92,7 @@
                                     class="form-control datetimepicker-input @error('expenseDate') is-invalid @enderror" 
                                     value="{{ old('expenseDate') }}"
                                     data-target="#expenseDate"
-                                    placeholder="Y-m-d"
+                                    placeholder="Enter a date ( MM/DD/YYY )"
                                 />
                                 <div class="input-group-append" data-target="#expenseDate" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -118,7 +118,7 @@
 
                 <!-- Save Expense Button -->
                 <div class="text-right mt-3">
-                    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i> Save Expense</a>
+                    <button class="btn btn-dark" type="submit"><i class="fas fa-download"></i> Save Expense</a>
                 </div>
             </form>
         </div>

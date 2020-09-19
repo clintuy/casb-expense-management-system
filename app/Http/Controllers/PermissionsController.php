@@ -19,6 +19,8 @@ class PermissionsController extends Controller
 
     public function index()
     {
+        abort_unless(\Gate::allows('permission_access'), 403);
+
         // get all permissions
         $permissions = Permission::all();
 
@@ -28,12 +30,16 @@ class PermissionsController extends Controller
 
     public function create()
     {
+        abort_unless(\Gate::allows('add_permission'), 403);
+
         return view('pages.permissions.create');
     }
 
 
     public function store(Request $request)
     {
+        abort_unless(\Gate::allows('add_permission'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'permissionName' => ['required', 'string', 'max:255', 'unique:permissions,name']
@@ -57,6 +63,8 @@ class PermissionsController extends Controller
 
     public function edit($id)
     {
+        abort_unless(\Gate::allows('edit_permission'), 403);
+
         // get permissions data using this id
         $permission = Permission::where('id', $id)->firstOrFail();
 
@@ -66,6 +74,8 @@ class PermissionsController extends Controller
 
     public function update(Request $request, $id)
     {
+        abort_unless(\Gate::allows('edit_permission'), 403);
+
         // validate inputs
         $validator = $request->validate([
             'permissionName' => ['required', 'string', 'max:255', 'unique:permissions,name,' . $id]
@@ -84,6 +94,12 @@ class PermissionsController extends Controller
 
     public function destroy($id)
     {
-        //
+        abort_unless(\Gate::allows('delete_permission'), 403);
+
+        $permission = Permission::where('id', $id)->firstOrFail();
+        $permission->delete();
+
+        return redirect()->route('permissions.index')
+            ->with('success', 'Permission data successfully deleted!');
     }
 }

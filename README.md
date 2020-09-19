@@ -6,9 +6,9 @@
 
     $ cp .env.example .env
 
-	$ composer install
+    $ composer install
 
-	$ composer update 
+    $ composer update
 
     $ npm install
 
@@ -20,6 +20,6 @@
 
     $ php artisan route:clear
 
+## Then you can run it now by using this:
 
-
-
+    $ php artisan serve

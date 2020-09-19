@@ -89,7 +89,7 @@
 
                 <!-- Update User Button -->
                 <div class="text-right">
-                    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i> Update User</a>
+                    <button class="btn btn-dark" type="submit"><i class="fas fa-download"></i> Update User</a>
                 </div>
             </form>
         </div>
