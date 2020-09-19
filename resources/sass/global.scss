@@ -4,13 +4,14 @@
 }
 
 .bg-custom-primary {
-    background-color: $custom-primary-color;
-}
-.bg-custom-secondary {
-    background-color: $custom-secondary-color;
+    background-color: $custom-primary-color !important;
 }
 
-table, 
+.bg-custom-secondary {
+    background-color: $custom-secondary-color !important;
+}
+
+table,
 thead,
 tr,
 tbody,

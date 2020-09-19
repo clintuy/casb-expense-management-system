@@ -79,14 +79,14 @@ class ExpenseCategoriesController extends Controller
             'categoryName' => ['required', 'string', 'max:255', 'unique:expense_categories,name,' . $id]
         ]);
 
-        // get permission using this id and update
+        // get Expense Category using this id and update
         $expense_category = ExpenseCategory::where('id', $id)
             ->update([
             'name' => $request['categoryName']
         ]);
 
         return redirect()->route('expense-categories.index')
-            ->with('success', 'Permission successfully updated!');
+            ->with('success', 'Expense Category successfully updated!');
     }
 
 

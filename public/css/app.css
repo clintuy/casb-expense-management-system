@@ -6,11 +6,11 @@
 }
 
 .bg-custom-primary {
-  background-color: #8F3D94;
+  background-color: #8F3D94 !important;
 }
 
 .bg-custom-secondary {
-  background-color: #222222;
+  background-color: #222222 !important;
 }
 
 table,

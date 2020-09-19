@@ -1,8 +1,8 @@
+# Laravel Version 6.\*
+
 # Prerequisites
 
 ## After cloning this repository, open the file, go to your termnial and run the following command(s)
-
-    $ git checkout develop
 
     $ cp .env.example .env
 
